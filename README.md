@@ -4,7 +4,7 @@
   - [What is this?](#what-is-this)
   - [Resource Requirements](#resource-requirements)
   - [Dependencies](#dependencies)
-  - [Supported Node Image Operating System](#supported-node-image-operating-system)
+  - [Supported Node Image Operating Systems](#supported-node-image-operating-systems)
   - [Quick-start & Usage](#quick-start--usage)
   - [Environment Setup](#environment-setup)
     - [Step 1 - `gcloud` Configuration](#step-1---gcloud-configuration)
@@ -21,14 +21,14 @@
 
 ### Resource Requirements
 
-* For information on resource requirements required to run Ondat, refer to the [official Ondat prerequisites documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/).
+* For information on resource requirements required to run Ondat, refer to the [official Ondat prerequisites documentation](https://docs.ondat.io/docs/prerequisites/).
 
 ### Dependencies
 
 * Required utilities to ensure that deployments are executed successfully.
   * `terraform` , `gcloud` , `kubectl` , `kubectl-storageos`
 
-### Supported Node Image Operating System
+### Supported Node Image Operating Systems
 
 * Tested on;
   * `UBUNTU` , `UBUNTU_CONTAINERD`
@@ -45,20 +45,19 @@ $ cd terraform-gke-ondat-demo/
 # initialise the working directory containing the configuration files
 $ terraform init
 
-# validates the configuration files in the working directory
+# validate the configuration files in the working directory
 $ terraform validate
 
-# creates an execution plan first
+# create an execution plan first
 $ terraform plan
 
 # execute the actions proposed in a plan and enter your PROJECT_ID
 $ terraform apply
 
-# after the cluster has been provisioned, inspect the pods with kubectl
-$ kubectl get pods --all-namespaces \
-  --kubeconfig=kubeconfig-ondat-demo
+# after the cluster has been provisioned, inspect the pods with kubectl and generated kubeconfig file
+$ kubectl get pods --all-namespaces --kubeconfig=kubeconfig-ondat-demo
 
-# destroy the environment created once finished finshed GKE & Ondat
+# destroy the environment created once you are finished testing out GKE & Ondat
 $ terraform destroy
 ```
 
@@ -66,7 +65,7 @@ $ terraform destroy
 
 #### Step 1 - `gcloud` Configuration
 
-* Ensure that [`gcloud`](https://cloud.google.com/sdk/docs/install) CLI is installed on your local machine and is in your path. 
+* Ensure that the [`gcloud`](https://cloud.google.com/sdk/docs/install) CLI is installed on your local machine and is in your path. 
   * Initialise `gcloud` CLI.
     * [`gcloud init`](https://cloud.google.com/sdk/gcloud/reference/init)
 * Set the project property for `gcloud`.
@@ -79,10 +78,10 @@ $ terraform destroy
 
 #### Step 2 - `terraform` Configuration
 
-* Ensure that [`terraform`](https://learn.hashicorp.com/tutorials/terraform/install-cli) CLI is installed on your local machine and is in your path.
-* [Apple M1](https://en.wikipedia.org/wiki/Appe_M1) users may get the following error message when they run `terraform init` on their machine.
+* Ensure that the [`terraform`](https://learn.hashicorp.com/tutorials/terraform/install-cli) CLI is installed on your local machine and is in your path.
+* [Apple M1](https://en.wikipedia.org/wiki/Apple_M1) users may get the following error message when they run `terraform init` on their machine.
 
-```json
+```
  Error: Incompatible provider version
 │
 │ Provider registry.terraform.io/hashicorp/template v2.2.0 does not have a package available for your current platform, darwin_arm64.
@@ -91,7 +90,7 @@ $ terraform destroy
 ╵
 ```
 
-* This is due to the [`hashicorp/template` provider](https://github.com/hashicorp/terraform/issues/27257#issuecomment-825102330) being [deprecated](https://registry.terraform.io/providers/hashicorp/template/latest/docs#deprecation) but some providers still depend on it. To address this issue, apply the following workaround solution.
+* This is due to the [`hashicorp/template` provider](https://github.com/hashicorp/terraform/issues/27257#issuecomment-825102330) being [deprecated](https://registry.terraform.io/providers/hashicorp/template/latest/docs#deprecation), but some providers still depend on it. To address this issue, apply the following workaround solution.
 
 ```bash
 # clone the template provider repository
@@ -110,7 +109,7 @@ $ chmod -v +x terraform-provider-template
 $ mkdir -v ~/.terraform.d/plugins/registry.terraform.io/hashicorp/template/2.2.0/darwin_arm64/
 $ mv -v terraform-provider-template ~/.terraform.d/plugins/registry.terraform.io/hashicorp/template/2.2.0/darwin_arm64/
 
-# go back to the working directory containing the configuration files and initialise again
+# go back to the `terraform-gke-ondat-demo/` directory containing the configuration files and initialise again
 $ terraform init
 ```
 
@@ -126,7 +125,6 @@ $ terraform init
 ### Acknowledgements
 
 * [Provisioning Kubernetes clusters on GCP with Terraform and GKE - learnk8s](https://learnk8s.io/terraform-gke).
-* [Google Cloud Platform Provider - Terraform](https://registry.terraform.io/providers/hashicorp/google/latest/docs).
 * [darwin/arm64 build #27257 - GitHub Issues](https://github.com/hashicorp/terraform/issues/27257)
 
 ### Licence
