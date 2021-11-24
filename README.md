@@ -115,8 +115,8 @@ $ terraform init
 
 #### Step 3 - `kubectl` & `kubectl-storageos` Configuration
 
-* Ensure that [`kubectl`](https://kubernetes.io/docs/tasks/tools/#kubectl) CLI is installed on your local machine and is in your path.
-* Ensure that [`kubectl-storageos`](https://github.com/storageos/kubectl-storageos/releases) CLI is installed on your local machine and is in your path.
+* Ensure that the [`kubectl`](https://kubernetes.io/docs/tasks/tools/#kubectl) CLI is installed on your local machine and is in your path.
+* Ensure that the [`kubectl-storageos`](https://github.com/storageos/kubectl-storageos/releases) CLI is installed on your local machine and is in your path.
 
 ### Contributing
 
