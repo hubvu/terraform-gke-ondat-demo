@@ -39,8 +39,8 @@
 # clone the repository
 $ git clone git@github.com:hubvu/terraform-gke-ondat-demo.git
 
-# navigate into the directory
-$ cd terraform-gke-ondat-demo/
+# navigate into the `single-cluster/` directory
+$ cd terraform-gke-ondat-demo/single-cluster/
 
 # initialise the working directory containing the configuration files
 $ terraform init
@@ -54,7 +54,7 @@ $ terraform plan
 # execute the actions proposed in a plan and enter your PROJECT_ID
 $ terraform apply
 
-# after the cluster has been provisioned, inspect the pods with kubectl and generated kubeconfig file
+# after the cluster has been provisioned, inspect the pods with kubectl and the generated kubeconfig file
 $ kubectl get pods --all-namespaces --kubeconfig=kubeconfig-ondat-demo
 
 # destroy the environment created once you are finished testing out GKE & Ondat
@@ -99,7 +99,7 @@ $ git clone git@github.com:hashicorp/terraform-provider-template.git
 # navigate into the directory
 $ cd terraform-provider-template/
 
-# build the template provider from source
+# build the template provider from source (requires Golang to be installed)
 $ go build
 
 # make the generated binary executable
@@ -125,7 +125,14 @@ $ terraform init
 ### Acknowledgements
 
 * [Provisioning Kubernetes clusters on GCP with Terraform and GKE - learnk8s](https://learnk8s.io/terraform-gke).
-* [darwin/arm64 build #27257 - GitHub Issues](https://github.com/hashicorp/terraform/issues/27257)
+* [Provision a GKE Cluster (Google Cloud) - Terraform](https://learn.hashicorp.com/tutorials/terraform/gke)
+  * [Google Cloud Platform Provider - Terraform](https://registry.terraform.io/providers/hashicorp/google/latest/docs)
+  * [Google Network Module - Terraform](https://registry.terraform.io/modules/terraform-google-modules/network/google/latest)
+  * [Kubernetes Engine Module - Terraform](https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest)
+  * [Kubernetes Engine Auth Module - Terraform](https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest/submodules/auth)
+* [`local_file` Resource - Terraform](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file)
+* [`local-exec` Provisioner - Terraform](https://www.terraform.io/docs/language/resources/provisioners/local-exec.html)
+* [darwin/arm64 build #27257 - GitHub Issues](https://github.com/hashicorp/terraform/issues/27257).
 
 ### Licence
 
