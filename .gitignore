@@ -30,3 +30,6 @@ override.tf.json
 
 # Ignore Dependency Lock File
 .terraform.lock.hcl 
+
+# Ignore generated kube config file
+kubeconfig-ondat-demo
