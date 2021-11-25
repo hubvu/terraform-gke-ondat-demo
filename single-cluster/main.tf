@@ -16,7 +16,7 @@ resource "local_file" "kubeconfig" {
   # install ondat
   provisioner "local-exec" {
     command = <<EOT
-      export KUBECONFIG=./kubeconfig-ondat-demo
+      export KUBECONFIG="./kubeconfig-ondat-demo"
 
       kubectl storageos install --include-etcd \
         --admin-username 'admin' \
