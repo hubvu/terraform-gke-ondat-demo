@@ -5,11 +5,12 @@
   - [Resource Requirements](#resource-requirements)
   - [Dependencies](#dependencies)
   - [Supported Node Image Operating Systems](#supported-node-image-operating-systems)
-  - [Quick-start & Usage](#quick-start--usage)
   - [Environment Setup](#environment-setup)
     - [Step 1 - `gcloud` Configuration](#step-1---gcloud-configuration)
     - [Step 2 - `terraform` Configuration](#step-2---terraform-configuration)
     - [Step 3 - `kubectl` & `kubectl-storageos` Configuration](#step-3---kubectl--kubectl-storageos-configuration)
+  - [Quick-start & Usage](#quick-start--usage)
+  - [Using Ondat](#using-ondat)
   - [Contributing](#contributing)
   - [Acknowledgements](#acknowledgements)
   - [Licence](#licence)
@@ -32,35 +33,6 @@
 
 * Tested on;
   * `UBUNTU` , `UBUNTU_CONTAINERD`
-
-### Quick-start & Usage
-
-```bash
-# clone the repository
-$ git clone git@github.com:hubvu/terraform-gke-ondat-demo.git
-
-# navigate into the `single-cluster/` directory
-$ cd terraform-gke-ondat-demo/single-cluster/
-
-# initialise the working directory containing the configuration files
-$ terraform init
-
-# validate the configuration files in the working directory
-$ terraform validate
-
-# create an execution plan first
-$ terraform plan
-
-# execute the actions proposed in a plan and enter your PROJECT_ID
-$ terraform apply
-
-# after the cluster has been provisioned, inspect the pods with kubectl and the generated kubeconfig file
-$ export KUBECONFIG="./kubeconfig-ondat-demo"
-$ kubectl get pods --all-namespaces
-
-# destroy the environment created once you are finished testing out GKE & Ondat
-$ terraform destroy
-```
 
 ### Environment Setup
 
@@ -118,6 +90,39 @@ $ terraform init
 
 * Ensure that the [`kubectl`](https://kubernetes.io/docs/tasks/tools/#kubectl) CLI is installed on your local machine and is in your path.
 * Ensure that the [`kubectl-storageos`](https://github.com/storageos/kubectl-storageos/releases) CLI is installed on your local machine and is in your path.
+
+### Quick-start & Usage
+
+```bash
+# clone the repository
+$ git clone git@github.com:hubvu/terraform-gke-ondat-demo.git
+
+# navigate into the `single-cluster/` directory
+$ cd terraform-gke-ondat-demo/single-cluster/
+
+# initialise the working directory containing the configuration files
+$ terraform init
+
+# validate the configuration files in the working directory
+$ terraform validate
+
+# create an execution plan first
+$ terraform plan
+
+# execute the actions proposed in a plan and enter your PROJECT_ID
+$ terraform apply
+
+# after the cluster has been provisioned, inspect the pods with kubectl and the generated kubeconfig file
+$ export KUBECONFIG="./kubeconfig-ondat-demo"
+$ kubectl get pods --all-namespaces
+
+# destroy the environment created once you are finished testing out GKE & Ondat
+$ terraform destroy
+```
+
+### Using Ondat
+
+* 
 
 ### Contributing
 
