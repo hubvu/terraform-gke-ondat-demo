@@ -56,7 +56,7 @@ $ terraform apply
 
 # after the cluster has been provisioned, inspect the pods with kubectl and the generated kubeconfig file
 $ export KUBECONFIG="./kubeconfig-ondat-demo"
-$ kubectl get pods --all-namespaces --kubeconfig=kubeconfig-ondat-demo
+$ kubectl get pods --all-namespaces
 
 # destroy the environment created once you are finished testing out GKE & Ondat
 $ terraform destroy
