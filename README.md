@@ -55,6 +55,7 @@ $ terraform plan
 $ terraform apply
 
 # after the cluster has been provisioned, inspect the pods with kubectl and the generated kubeconfig file
+$ export KUBECONFIG="./kubeconfig-ondat-demo"
 $ kubectl get pods --all-namespaces --kubeconfig=kubeconfig-ondat-demo
 
 # destroy the environment created once you are finished testing out GKE & Ondat
@@ -71,7 +72,7 @@ $ terraform destroy
 * Set the project property for `gcloud`.
   * [`gcloud config set project PROJECT_ID`](https://cloud.google.com/sdk/gcloud/reference/config/set)
 * Authorise `gcloud` CLI to access Google Cloud using your user account.
-  * [`gcloud auth login`](https://cloud.google.com/sdk/gcloud/reference/auth/login)
+  * [`gcloud auth application-default login`](https://cloud.google.com/sdk/gcloud/reference/auth/login)
 * Ensure that the Kubernetes Engine API and Compute Engine API are enabled.
   * [`gcloud services enable container.googleapis.com`](https://cloud.google.com/kubernetes-engine/docs/reference/rest)
   * [`gcloud services enable compute.googleapis.com`](https://cloud.google.com/compute/docs/reference/rest/v1)
