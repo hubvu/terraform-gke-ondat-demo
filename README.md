@@ -158,6 +158,7 @@ $ kubectl storageos install --include-etcd \
 # inspect Ondat's deployments.
 $ kubectl get deployments --all-namespaces | grep "storageos"
 
+NAMESPACE        NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
 storageos-etcd   storageos-etcd-controller-manager   1/1     1            1           4h53m
 storageos-etcd   storageos-etcd-proxy                1/1     1            1           4h53m
 storageos        storageos-api-manager               2/2     2            2           4h52m
@@ -168,11 +169,13 @@ storageos        storageos-scheduler                 1/1     1            1     
 # inspect Ondat's daemonset.
 $ kubectl get daemonset --all-namespaces | grep "storageos"
 
+NAMESPACE     NAME                        DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                                                             AGE
 storageos     storageos-node              3         3         3       3            3           <none>                                                                    4h56m
 
 # inspect Ondat's pods.
 $ kubectl get pods --all-namespaces | grep "storageos"
 
+NAMESPACE        NAME                                                             READY   STATUS    RESTARTS   AGE
 storageos-etcd   storageos-etcd-0-j4vmb                                           1/1     Running   0          4h58m
 storageos-etcd   storageos-etcd-1-tv2p5                                           1/1     Running   0          4h58m
 storageos-etcd   storageos-etcd-2-cdcm2                                           1/1     Running   0          4h58m
@@ -215,6 +218,7 @@ $ kubectl patch storageclass ondat-encryption-replication-topology-aware-placeme
 # inspect Ondat's StorageClass and ensure it's now the default.
 $ kubectl get storageclasses | grep "storageos"
 
+NAME        PROVISIONER         RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
 ondat-encryption-replication-topology-aware-placement (default)   csi.storageos.com       Delete          Immediate              true                   15m
 storageos                                                         csi.storageos.com       Delete          Immediate              true                   6h31m
 ```
@@ -241,7 +245,8 @@ my-cluster-kafka-0                            1/1     Running   0          3m39s
 my-cluster-zookeeper-0                        1/1     Running   0          4m23s
 strimzi-cluster-operator-85bb4c6-fx2fp        1/1     Running   0          29m
 
-# generate some data (https://www.lipsum.com/) by sending and receiving messages with Kafka.
+# generate some random text by sending and receiving messages with Kafka.
+# you can use https://www.lipsum.com/ or generate your own text.
 
 # run a Kafka producer to send messages;
 $ kubectl --namespace=kafka run kafka-producer \
@@ -275,21 +280,24 @@ $ kubectl port-forward service/storageos 5705 --namespace=storageos
 http://localhost:5705/
 ```
 
-<img alt="" width="150" height="100" src="./assets/usecases/ondat/assets/ondatui-image-1">
-<img alt="" width="150" height="100" src="./assets/usecases/ondat/assets/ondatui-image-2">
-<img alt="" width="150" height="100" src="./assets/usecases/ondat/assets/ondatui-image-3">
-<img alt="" width="150" height="100" src="./assets/usecases/ondat/assets/ondatui-image-4">
+<p align="center">
+  <img alt="Ondat UI Login" width="499" height="485" src="single-cluster/usecases/ondat/assets/ondat-ui-login-sh.png">
+  <img alt="Ondat UI Nodes" width="" height="" src="single-cluster/usecases/ondat/assets/ondat-ui-nodes-sh.png">
+  <img alt="Ondat UI Kafka Namespace Volumes" width="" height="" src="single-cluster/usecases/ondat/assets/ondat-ui-volumes-kafka-namespace-sh.png">
+  <img alt="Ondat UI Volume Details Kafka 1" width="" height="" src="single-cluster/usecases/ondat/assets/ondat-ui-volume-details-kafka-1-sh.png">
+  <img alt="Ondat UI Volume Details Kafka 2" width="" height="" src="single-cluster/usecases/ondat/assets/ondat-ui-volume-details-kafka-2-sh.png">
+</p>
 
-5. Use Ondat's CLI to review the status of the cluster and the volumes.
+1. Use Ondat's CLI to review the status of the cluster and the volumes.
 
 ```bash
 # check the version of `storageos` and ensure that it is in your path.
 $ storageos version
 
 # set the authentication and endpoint environment variables. 
-export STORAGEOS_USERNAME="admin"
-export STORAGEOS_PASSWORD="ADD_YOUR_STRONG_PASSWORD_HERE"
-export STORAGEOS_ENDPOINTS="127.0.0.1:5705"
+$ export STORAGEOS_USERNAME="admin"
+$ export STORAGEOS_PASSWORD="ADD_YOUR_STRONG_PASSWORD_HERE"
+$ export STORAGEOS_ENDPOINTS="127.0.0.1:5705"
 ```
 
 ```bash
@@ -321,7 +329,7 @@ Nodes:
   Health:         online
   Address:        10.10.0.4:5703
 
-# show details of the node.
+# show details of the available nodes.
 $ storageos describe nodes
 
 ID                         6064dc4c-f17c-4d9b-9ffa-5e52e027cf0a
@@ -457,6 +465,7 @@ $ apt update && apt install tree
 
 # use `df` to show mounted filesystems.
 $ df -h | grep "storageos"
+
 Filesystem                                                         Size  Used Avail Use% Mounted on
 /var/lib/storageos/volumes/v.6faf10b4-2226-4529-8ed4-f8af6086eda0   15G   41M   14G   1% /host/var/lib/kubelet/pods/4f8794f4-6622-482b-ab65-7e40bcec4c0c/volumes/kubernetes.io~csi/pvc-8a0cef66-151b-4acd-880f-29569e61ccc6/mount
 storageos                                                          4.0K     0  4.0K   0% /host/var/lib/storageos/volumes
@@ -564,15 +573,15 @@ $ terraform destroy
 ### Acknowledgements
 
 * [Provisioning Kubernetes clusters on GCP with Terraform and GKE - learnk8s](https://learnk8s.io/terraform-gke).
-* [Provision a GKE Cluster (Google Cloud) - Terraform](https://learn.hashicorp.com/tutorials/terraform/gke)
-  * [Google Cloud Platform Provider - Terraform](https://registry.terraform.io/providers/hashicorp/google/latest/docs)
-  * [Google Network Module - Terraform](https://registry.terraform.io/modules/terraform-google-modules/network/google/latest)
-  * [Kubernetes Engine Module - Terraform](https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest)
-  * [Kubernetes Engine Auth Module - Terraform](https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest/submodules/auth)
-* [`local_file` Resource - Terraform](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file)
-* [`local-exec` Provisioner - Terraform](https://www.terraform.io/docs/language/resources/provisioners/local-exec.html)
+* [Provision a GKE Cluster (Google Cloud) - Terraform](https://learn.hashicorp.com/tutorials/terraform/gke).
+  * [Google Cloud Platform Provider - Terraform](https://registry.terraform.io/providers/hashicorp/google/latest/docs).
+  * [Google Network Module - Terraform](https://registry.terraform.io/modules/terraform-google-modules/network/google/latest).
+  * [Kubernetes Engine Module - Terraform](https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest).
+  * [Kubernetes Engine Auth Module - Terraform](https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest/submodules/auth).
+* [`local_file` Resource - Terraform](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file).
+* [`local-exec` Provisioner - Terraform](https://www.terraform.io/docs/language/resources/provisioners/local-exec.html).
 * [darwin/arm64 build #27257 - GitHub Issues](https://github.com/hashicorp/terraform/issues/27257).
-* [Debugging via a shell on the node - Kubernetes](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-running-pod/#node-shell-session)
+* [Debugging via a shell on the node - Kubernetes](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-running-pod/#node-shell-session).
 
 ### Licence
 
