@@ -288,7 +288,7 @@ http://localhost:5705/
   <img alt="Ondat UI Volume Details Kafka 2" width="" height="" src="single-cluster/usecases/ondat/assets/ondat-ui-volume-details-kafka-2-sh.png">
 </p>
 
-1. Use Ondat's CLI to review the status of the cluster and the volumes.
+5. Use Ondat's CLI to review the status of the cluster and the volumes.
 
 ```bash
 # check the version of `storageos` and ensure that it is in your path.
