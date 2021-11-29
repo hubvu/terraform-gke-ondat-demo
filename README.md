@@ -119,8 +119,8 @@ $ terraform apply
 $ export KUBECONFIG="./kubeconfig-ondat-demo"
 $ kubectl get pods --all-namespaces
 
-# destroy the environment created once you are finished testing 
-# out GKE & Ondat.
+# destroy the environment created with terraform once you 
+# are finished testing out GKE & Ondat.
 $ terraform destroy
 ```
 
@@ -544,7 +544,7 @@ $ tree
 6. After you are finished testing, remove the workloads deployed on the cluster, uninstall Ondat and teardown the cluster you provisioned.
 
 ```bash
-# bring down Strimzi's workload resources first.
+# bring down Strimzi's workload resources and namespace first.
 kubectl delete --filename=usecases/strimzi/kafka-persistent-single-ondat.yaml
 kubectl delete --filename='https://strimzi.io/install/latest?namespace=kafka' --namespace=kafka
 kubectl delete namespace kafka
@@ -552,8 +552,8 @@ kubectl delete namespace kafka
 # remove Ondat from the cluster.
 kubectl storageos uninstall --include-etcd
 
-# destroy the environment created once you are finished testing 
-# out GKE & Ondat.
+# destroy the environment created with terraform once you 
+# are finished testing out GKE & Ondat.
 $ terraform destroy
 ```
 
