@@ -116,7 +116,12 @@ $ terraform apply
 
 # after the cluster has been provisioned, inspect the pods with 
 # kubectl and the generated kubeconfig file.
-$ export KUBECONFIG="./kubeconfig-ondat-demo"
+$ export KUBECONFIG="${PWD}/kubeconfig-ondat-demo"
+
+# or use gcloud to get the cluster credentials automatically added 
+# to your `$HOME/.kube/config`.
+$ gcloud container clusters get-credentials terraform-gke-cluster-ondat-demo --region="europe-west1"
+
 $ kubectl get pods --all-namespaces
 
 # destroy the environment created with terraform once you 
@@ -218,7 +223,7 @@ $ kubectl patch storageclass ondat-encryption-replication-topology-aware-placeme
 # inspect Ondat's StorageClass and ensure it's now the default.
 $ kubectl get storageclasses | grep "storageos"
 
-NAME        PROVISIONER         RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+NAME                                                              PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
 ondat-encryption-replication-topology-aware-placement (default)   csi.storageos.com       Delete          Immediate              true                   15m
 storageos                                                         csi.storageos.com       Delete          Immediate              true                   6h31m
 ```
