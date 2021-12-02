@@ -33,3 +33,6 @@ override.tf.json
 
 # Ignore generated kube config file
 kubeconfig-ondat-demo
+
+# ignore .DS_Store
+.DS_Store

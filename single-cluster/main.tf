@@ -16,7 +16,7 @@ resource "local_file" "kubeconfig" {
   # install ondat
   provisioner "local-exec" {
     command = <<EOT
-      export KUBECONFIG=./kubeconfig-ondat-demo
+      export KUBECONFIG="./kubeconfig-ondat-demo"
 
       kubectl storageos install --include-etcd \
         --admin-username 'admin' \
@@ -66,11 +66,11 @@ module "gke" {
   node_pools = [
     {
       name                      = "gke-node-pool"
-      machine_type              = "e2-medium"
+      machine_type              = "c2-standard-4"
       node_locations            = "europe-west1-b,europe-west1-c,europe-west1-d"
       min_count                 = 1
       max_count                 = 2
-      disk_size_gb              = 100
+      disk_size_gb              = 500
       disk_type                 = "pd-ssd"
       local_ssd_count           = 0
       image_type                = "UBUNTU_CONTAINERD"
