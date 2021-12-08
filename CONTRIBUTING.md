@@ -6,7 +6,7 @@
 ### Opening an Issue
 
 * If you experience or notice an error, bug, documentation issue, please feel free to;
-  1. [Open a GitHub Issue](https://github.com/hubvu/terraform-gke-ondat-demo/issues) against the project.
+  1. [Open a GitHub Issue](https://github.com/hubvu/terraform-kubernetes-ondat-demo/issues) against the project.
   2. Provide details and logs in the description on how to reproduce the issue.
   3. Provide details of the operating system type and version, custom configurations, versions of applications that are displaying the issue, if applicable.
 
