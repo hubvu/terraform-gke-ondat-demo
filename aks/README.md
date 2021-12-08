@@ -40,7 +40,28 @@
 * Ensure that the [`az`](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) CLI is installed on your local machine and is in your path. 
 * Authorise the `az` CLI to access Microsoft Azure using your user account.
   * [`az login`](https://cloud.google.com/sdk/gcloud/reference/auth/login)
+* Ensure that a Service Principal with the role `Contributor` is created first for `terraform`.
 
+```bash
+# make a note of your Subscription ID.
+$ az account list | grep "id"
+
+# create a Contributor Service Principal for Terraform and
+# make a note of the following key value pairs;
+# `appId`, `password` and `tenant`
+$ az ad sp create-for-rbac \
+  --role="Contributor" \
+  --scopes="/subscriptions/YOUR_SUBSCRIPTION_ID"
+```
+* Ensure that the correct Azure environment variables are set.
+
+```bash
+# set the required Azure environment variables with the values noted earlier. 
+$ export ARM_CLIENT_ID="YOUR_APP_ID"
+$ export ARM_SUBSCRIPTION_ID="YOUR_SUBSCRIPTION_ID"
+$ export ARM_TENANT_ID="YOUR_TENANT_ID"
+$ export ARM_CLIENT_SECRET="YOUR_PASSWORD"
+```
 #### Step 2 - `terraform` Configuration
 
 * Ensure that the [`terraform`](https://learn.hashicorp.com/tutorials/terraform/install-cli) CLI is installed on your local machine and is in your path.
@@ -94,22 +115,6 @@ $ git clone git@github.com:hubvu/terraform-kubernetes-ondat-demo.git
 
 # navigate into the `aks/` directory.
 $ cd terraform-kubernetes-ondat-demo/aks/
-
-# make a note of your Subscription ID.
-$ az account list | grep "id"
-
-# create a Contributor Service Principal for Terraform and
-# make a note of the following key value pairs;
-# `appId`, `password` and `tenant`
-$ az ad sp create-for-rbac \
-  --role="Contributor" \
-  --scopes="/subscriptions/YOUR_SUBSCRIPTION_ID"
-
-# set the required Azure environment variables with the values noted earlier. 
-$ export ARM_CLIENT_ID="YOUR_APP_ID"
-$ export ARM_SUBSCRIPTION_ID="YOUR_SUBSCRIPTION_ID"
-$ export ARM_TENANT_ID="YOUR_TENANT_ID"
-$ export ARM_CLIENT_SECRET="YOUR_PASSWORD"
 
 # initialise the working directory containing the configuration files.
 $ terraform init
