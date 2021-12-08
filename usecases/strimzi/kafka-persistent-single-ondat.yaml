@@ -1,0 +1,42 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata:
+  name: my-cluster
+  namespace: kafka                                                     # run this custom resource in the kafka namespace.
+spec:
+  kafka:
+    version: 3.0.0
+    replicas: 1
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+      - name: tls
+        port: 9093
+        type: internal
+        tls: true
+    config:
+      offsets.topic.replication.factor: 1
+      transaction.state.log.replication.factor: 1
+      transaction.state.log.min.isr: 1
+      log.message.format.version: "3.0"
+      inter.broker.protocol.version: "3.0"
+    storage:
+      type: jbod
+      volumes:
+      - id: 0
+        type: persistent-claim
+        class: ondat-encryption-replication-topology-aware-placement   # set Ondat's StorageClass.
+        size: 15Gi                                                     # changed form 100Gi for testing.
+        deleteClaim: false
+  zookeeper:
+    replicas: 1
+    storage:
+      type: persistent-claim
+      class: ondat-encryption-replication-topology-aware-placement     # set Ondat's StorageClass
+      size: 15Gi                                                       # changed form 100Gi for testing.
+      deleteClaim: false
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
