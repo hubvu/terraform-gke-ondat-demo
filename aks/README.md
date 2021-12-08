@@ -140,7 +140,7 @@ $ terraform destroy
 
 ### Using Ondat
 
-* Review the [Ondat Demo README.md](./../ondat/README.md) for an introduction to Ondat and its usage. 
+* Review the [Ondat Demo README.md](./../ondat/README.md) for an overview of Ondat and its usage. 
 
 ### Acknowledgements
 
