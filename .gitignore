@@ -31,8 +31,8 @@ override.tf.json
 # Ignore Dependency Lock File
 .terraform.lock.hcl 
 
-# Ignore generated kube config file
-kubeconfig-ondat-demo
+# Ignore all of the generated kube config files
+kubeconfig*
 
 # ignore .DS_Store
 .DS_Store
