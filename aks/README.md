@@ -171,7 +171,8 @@ $ terraform destroy
 ### Acknowledgements
 
 * [Provisioning Kubernetes clusters on Azure with Terraform and AKE - learnk8s](https://learnk8s.io/terraform-aks).
-* [Create a Kubernetes cluster with Azure Kubernetes Service using Terraform - Azure](https://docs.microsoft.com/en-us/azure/developer/terraform/create-k8s-cluster-with-tf-and-aks)
+* [Create a Kubernetes cluster with Azure Kubernetes Service using Terraform - Azure](https://docs.microsoft.com/en-us/azure/developer/terraform/create-k8s-cluster-with-tf-and-aks).
+* [End-to-End Azure Kubernetes Service (AKS) Deployment using Terraform - olohmann](https://github.com/olohmann/terraform-aks).
 * [Provision an AKS Cluster (Azure) - Terraform](https://learn.hashicorp.com/tutorials/terraform/aks).
   * [Azure Provider - Terraform](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs).
   * [`azurerm_resource_group` Resource - Terraform](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group).
@@ -183,4 +184,3 @@ $ terraform destroy
 * [`local_file` Resource - Terraform](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file).
 * [`local-exec` Provisioner - Terraform](https://www.terraform.io/docs/language/resources/provisioners/local-exec.html).
 * [darwin/arm64 build #27257 - GitHub Issues](https://github.com/hashicorp/terraform/issues/27257).
-* [`End-to-End Azure Kubernetes Service (AKS) Deployment using Terraform` - olohmann](https://github.com/olohmann/terraform-aks).
