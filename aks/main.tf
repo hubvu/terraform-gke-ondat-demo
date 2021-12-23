@@ -156,7 +156,6 @@ resource "local_file" "kubeconfig" {
       kubectl storageos install \
         --include-etcd \
         --etcd-tls-enabled \
-        --portal-api-url='https://setup.portal-api.ondat.io' \
         --etcd-storage-class='${var.ondat_etcd_storage_class}' \
         --etcd-namespace='${var.ondat_etcd_namespace}' \
         --admin-username='${var.ondat_admin_username}' \
