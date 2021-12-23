@@ -9,15 +9,28 @@
     - [Step 1 - `az` Configuration](#step-1---az-configuration)
     - [Step 2 - `terraform` Configuration](#step-2---terraform-configuration)
     - [Step 3 - `kubectl`, `kubectl-storageos` & `storageos` Configuration](#step-3---kubectl-kubectl-storageos--storageos-configuration)
+    - [Step 4 - Input Variables Configuration (Optional)](#step-4---input-variables-configuration-optional)
   - [Quick-start & Usage](#quick-start--usage)
   - [Using Ondat](#using-ondat)
   - [Acknowledgements](#acknowledgements)
 
-
 ### What is this?
 
 * A demonstration project that uses Terraform to provision Azure Kubernetes Service [AKS] cluster(s) and installs [Ondat](https://www.ondat.io/) - a software-defined, cloud native storage platform for Kubernetes.
-  * The goal of this project is to automate the process of creating, managing and destroying a AKS cluster with `terraform`. During the creation of a cluster, Ondat is installed using the [`kubectl-storageos`](https://github.com/storageos/kubectl-storageos) plugin.  
+  * The goal of this project is to automate the process of creating, managing and destroying an AKS cluster with `terraform`. 
+    * During the creation of the cluster, a `kubeconfig` file is generated, which is used to deploy Ondat using the [`kubectl-storageos`](https://github.com/storageos/kubectl-storageos) plugin.
+  * Below is a quick overview of how the directory is organised and brief configuration file descriptions.
+
+```yaml
+.
+├── README.md          # readme with instructions on how to provision an AKS cluster.
+├── data.tf            # data sources from provisioned resources.
+├── main.tf            # defined resources for provisioning an AKS cluster.
+├── monitoring.tf      # defined resources for provisioning Azure Log Analytics.
+├── output.tf          # output values for provisioned resources. 
+├── variables.tf       # input variables for customising resources.
+└── versions.tf        # defined provider versions to be used.
+```
 
 ### Resource Requirements
 
@@ -106,8 +119,16 @@ $ terraform init
 * Ensure that the [`kubectl-storageos`](https://github.com/storageos/kubectl-storageos/releases) plugin CLI is installed on your local machine and is in your path.
 * Ensure that the [`storageos`](https://github.com/storageos/go-cli/releases/) CLI is installed on your local machine and is in your path.
 
-### Quick-start & Usage
+#### Step 4 - Input Variables Configuration (Optional) 
 
+* By default, from a high level view - the following resources will be provisioned without making changes;
+  * AKS Cluster 
+     *  3 nodes in the default pool.
+     *  2 nodes in a separate node pool.
+  * Log Analytics Solution & Workspace using Container Insights
+* For users who would like to use different values such as a different region, node size, disk size or Kubernetes version before provisioning, review the [`variables.tf`](./variables.tf) configuration file and apply your desired values first. 
+
+### Quick-start & Usage
 
 ```bash
 # clone the repository.
@@ -134,7 +155,7 @@ $ export KUBECONFIG="${PWD}/kubeconfig"
 
 # or use `az` to get the cluster credentials automatically added 
 # to your `$HOME/.kube/config`.
-$ az aks get-credentials --resource-group aksOndatDemoResourceGroup --name terraform-aks-cluster-ondat-demo
+$ az aks get-credentials --resource-group aks-ondat-demo-resources --name ondat-cluster
 
 $ kubectl get pods --all-namespaces
 
@@ -155,6 +176,11 @@ $ terraform destroy
   * [Azure Provider - Terraform](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs).
   * [`azurerm_resource_group` Resource - Terraform](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group).
   * [`azurerm_kubernetes_cluster` Resource - Terraform](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster).
+  * [`azurerm_log_analytics_workspace` Resource - Terraform](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_workspace).
+  * [`azurerm_log_analytics_solution` Resource - Terraform](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_solution).
+  * [`azurerm_monitor_diagnostic_setting` Resource - Terraform](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting).
+* [Random Provider - Terraform](https://registry.terraform.io/providers/hashicorp/random/latest/docs).
 * [`local_file` Resource - Terraform](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file).
 * [`local-exec` Provisioner - Terraform](https://www.terraform.io/docs/language/resources/provisioners/local-exec.html).
 * [darwin/arm64 build #27257 - GitHub Issues](https://github.com/hashicorp/terraform/issues/27257).
+* [`End-to-End Azure Kubernetes Service (AKS) Deployment using Terraform` - olohmann](https://github.com/olohmann/terraform-aks).
