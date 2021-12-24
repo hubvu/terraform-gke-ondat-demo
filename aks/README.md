@@ -1,6 +1,6 @@
-## Provision AKS cluster(s) Using Terraform & Install Ondat
+## Provision An AKS cluster Using Terraform & Install Ondat
 
-- [Provision AKS cluster(s) Using Terraform & Install Ondat](#provision-aks-clusters-using-terraform--install-ondat)
+- [Provision An AKS cluster Using Terraform & Install Ondat](#provision-an-aks-cluster-using-terraform--install-ondat)
   - [What is this?](#what-is-this)
   - [Resource Requirements](#resource-requirements)
   - [Dependencies](#dependencies)
@@ -16,7 +16,7 @@
 
 ### What is this?
 
-* A demonstration project that uses Terraform to provision Azure Kubernetes Service [AKS] cluster(s) and installs [Ondat](https://www.ondat.io/) - a software-defined, cloud native storage platform for Kubernetes.
+* A demonstration project that uses Terraform to provision an Azure Kubernetes Service [AKS] cluster and installs [Ondat](https://www.ondat.io/) - a software-defined, cloud native storage platform for Kubernetes.
   * The goal of this project is to automate the process of creating, managing and destroying an AKS cluster with `terraform`. 
     * During the creation of the cluster, a `kubeconfig` file is generated, which is used to deploy Ondat using the [`kubectl-storageos`](https://github.com/storageos/kubectl-storageos) plugin.
   * Below is a quick overview of how the directory is organised and brief configuration file descriptions.
@@ -52,7 +52,7 @@
 
 * Ensure that the [`az`](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) CLI is installed on your local machine and is in your path. 
 * Authorise the `az` CLI to access Microsoft Azure using your user account.
-  * [`az login`](https://cloud.google.com/sdk/gcloud/reference/auth/login)
+  * [`az login`](https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli)
 * Ensure that a Service Principal with the role `Contributor` is created first for `terraform`.
 
 ```bash
