@@ -89,7 +89,7 @@ variable "cluster_auto_upgrade" {
 }
 
 variable "cluster_kubernetes_version" {
-  default     = "1.22.2"
+  default     = "1.23.5"
   type        = string
   sensitive   = false
   description = "The Kubernetes version for the AKS Cluster."
@@ -273,14 +273,14 @@ Ondat Variables
 ===============
 */
 variable "ondat_admin_username" {
-  default     = "admin"
+  default     = "storageos"
   type        = string
   sensitive   = false
   description = "The admin username for Ondat."
 }
 
 variable "ondat_admin_password" {
-  default     = "ADD_YOUR_STRONG_PASSWORD_HERE"
+  default     = "storageos"
   type        = string
   sensitive   = false
   description = "The admin password for Ondat."
@@ -308,7 +308,7 @@ variable "ondat_etcd_storage_class" {
 }
 
 variable "ondat_version" {
-  default     = "v2.5.0"
+  default     = "v2.7.0"
   type        = string
   sensitive   = false
   description = "The Ondat version that will be deployed."
