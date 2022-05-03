@@ -36,3 +36,6 @@ kubeconfig*
 
 # ignore .DS_Store
 .DS_Store
+
+# ignore user modified terraform.tfvars
+terraform.tfvars
