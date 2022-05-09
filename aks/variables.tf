@@ -272,6 +272,7 @@ variable "kubeconfig_filename" {
 Ondat Variables
 ===============
 */
+
 variable "ondat_admin_username" {
   default     = "storageos"
   type        = string
