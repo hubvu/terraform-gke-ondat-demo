@@ -88,7 +88,7 @@ $ cat v2-storage-class-ondat-encryption-replication-topology-aware-placement.yam
 $ kubectl apply -f v2-storage-class-ondat-encryption-replication-topology-aware-placement.yaml
 
 # mark the `standard` StorageClass (or equivalent) as non-default - [false].
-$ kubectl patch storageclass standard -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+$ kubectl patch storageclass default -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
 
 # mark the custom Ondat StorageClass as default - [true].
 $ kubectl patch storageclass ondat-encryption-replication-topology-aware-placement -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
